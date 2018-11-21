@@ -6,11 +6,11 @@ var data = require('./data.json')
 
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => {
+app.get('/overwatch', (req, res) => {
     res.send({ data })
 })
 
-app.get('/:id', (req, res, next) => {
+app.get('/overwatch/:id', (req, res, next) => {
     var { id } = req.params
     var filtered = data.filter(obj => {
         return obj.id == id
@@ -18,22 +18,22 @@ app.get('/:id', (req, res, next) => {
     res.send({ filtered })
 })
 
-app.post('/', (req, res, next) => {
+app.post('/overwatch', (req, res, next) => {
     var { body } = req
     var obj = {
         id: data.length + 1,
-        ideas: body.ideas
+        hero: body.hero
     }
     data.push(obj)
     res.send({ data: obj })
 })
 
-app.put('/:id', (req, res, next) => {
+app.put('/overwatch/:id', (req, res, next) => {
     var { body } = req
     var { id } = req.params
     var mapped = data.map(obj => {
         if (id == obj.id){
-            obj.ideas = body.ideas
+            obj.hero = body.hero
             obj = {
                 id: obj.id,
                 ...body
@@ -45,7 +45,7 @@ app.put('/:id', (req, res, next) => {
     res.send({ data })
 })
 
-app.delete('/:id', (req, res, next) => {
+app.delete('/overwatch/:id', (req, res, next) => {
     var { id } = req.params
     var mapped = data.filter(obj => {
         return obj.id != id
