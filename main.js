@@ -7,32 +7,40 @@ var data = require('./data.json')
 app.use(bodyParser.json())
 
 app.get('/overwatch', (req, res) => {
-    res.send({ data })
+    res.send({
+        data
+    })
 })
 
 app.get('/overwatch/:id', (req, res, next) => {
-    var { id } = req.params
-    var filtered = data.filter(obj => {
+    let { id } = req.params
+    let filtered = data.filter(obj => {
         return obj.id == id
     })
-    res.send({ filtered })
+    res.send({
+        filtered
+    })
 })
 
 app.post('/overwatch', (req, res, next) => {
-    var { body } = req
-    var obj = {
+    let { body } = req
+    let obj = {
         id: data.length + 1,
         hero: body.hero
     }
     data.push(obj)
-    res.send({ data: obj })
+    res.send({
+        data: obj
+    })
 })
 
 app.put('/overwatch/:id', (req, res, next) => {
-    var { body } = req
-    var { id } = req.params
-    var mapped = data.map(obj => {
-        if (id == obj.id){
+    let { body } = req
+    let {
+        id
+    } = req.params
+    let mapped = data.map(obj => {
+        if (id == obj.id) {
             obj.hero = body.hero
             obj = {
                 id: obj.id,
@@ -42,25 +50,27 @@ app.put('/overwatch/:id', (req, res, next) => {
         return obj
     })
     data = mapped
-    res.send({ data })
+    res.send({
+        data
+    })
 })
 
 app.delete('/overwatch/:id', (req, res, next) => {
-    var { id } = req.params
-    var mapped = data.filter(obj => {
+    let { id } = req.params
+    let mapped = data.filter(obj => {
         return obj.id != id
     })
     data = mapped
     res.send({ data })
 })
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.status(404).sendfile('index.html')
-  })
-  
-  app.use(function(err, req, res, next) {
+})
+
+app.use(function (err, req, res, next) {
     console.error(err.stack)
     res.status(500).send('Something broke!')
-  })  
+})
 
 app.listen(port)
