@@ -1,0 +1,10 @@
+[   
+    { "id": 1, "hero": "Lucio"},
+    { "id": 2, "hero": "Pharah"},
+    { "id": 3, "hero": "Zen"},
+    { "id": 4, "hero": "Mei"},
+    { "id": 5, "hero": "Hanzo"},
+    { "id": 6, "hero": "Zarya"},
+    { "id": 7, "hero": "Ashe"},
+    { "id": 8, "hero": "Tracer"}
+]
